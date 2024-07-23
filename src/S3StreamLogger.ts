@@ -13,7 +13,7 @@ import {
   STSClient,
 } from '@aws-sdk/client-sts';
 import { format as formatDate } from 'date-fns';
-import _ from 'lodash';
+import { isString, omit, pick } from 'lodash';
 import { hostname } from 'os';
 import path from 'path';
 import { Writable, WritableOptions } from 'stream';
@@ -73,8 +73,8 @@ export class S3StreamLogger extends Writable {
 
   constructor(options: S3StreamLoggerOptions) {
     // Partition options.
-    super(_.omit(options, StreamLoggerProperties));
-    _.assign(this.options, _.pick(options, StreamLoggerProperties));
+    super(omit(options, StreamLoggerProperties));
+    Object.assign(this.options, pick(options, StreamLoggerProperties));
 
     // Set defaults.
     this.options.access_key_id ??= process.env.AWS_ACCESS_KEY_ID;
@@ -269,7 +269,7 @@ export class S3StreamLogger extends Writable {
     encoding: BufferEncoding,
     cb?: (error?: Error | null) => void,
   ): void {
-    if (_.isString(chunk)) {
+    if (isString(chunk)) {
       chunk = Buffer.from(chunk, encoding);
     }
 
