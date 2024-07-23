@@ -19,7 +19,10 @@ import { S3StreamLogger } from '@karmaniverous/s3-streamlogger';
 
 const s3stream = new S3StreamLogger({ bucket: 'mys3bucket' });
 
-await s3stream.assumeRole({ RoleArn: 'arn:aws:iam::123456789012:role/MyRole' });
+await s3stream.assumeRole({
+  RoleArn: 'arn:aws:iam::123456789012:role/MyRole',
+  RoleSessionName: 'my-session',
+});
 
 s3stream.write('hello S3');
 ```
