@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/@karmaniverous%2Fs3-streamlogger.svg)](https://badge.fury.io/js/@karmaniverous%2Fs3-streamlogger)
+
 ## THIS IS A TYPESCRIPT REFACTOR!
 
 This project is a Typescript refactor of the original [s3-streamlogger](http://github.com/coggle/s3-streamlogger) package. It has a modern project architecture & features a couple of minor tweaks, but is otherwise a drop-in replacement for the original package.
