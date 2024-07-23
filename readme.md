@@ -1,6 +1,6 @@
 ## THIS IS A TYPESCRIPT REFACTOR!
 
-This is a typescript refactor of the original [s3-streamlogger](http://github.com/coggle/s3-streamlogger) package. It has a modern project architecture &features a couple of minor tweaks, but is otherwise a drop-in replacement for the original package.
+This project is a Typescript refactor of the original [s3-streamlogger](http://github.com/coggle/s3-streamlogger) package. It has a modern project architecture &features a couple of minor tweaks, but is otherwise a drop-in replacement for the original package.
 
 Key changes:
 
