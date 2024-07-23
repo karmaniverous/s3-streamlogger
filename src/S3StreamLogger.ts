@@ -13,15 +13,16 @@ import {
   STSClient,
 } from '@aws-sdk/client-sts';
 import { format as formatDate } from 'date-fns';
-import { isString, omit, pick } from 'lodash';
+import { isString } from 'is-what';
 import { hostname } from 'os';
 import path from 'path';
-import { Writable, WritableOptions } from 'stream';
+import { Writable, type WritableOptions } from 'stream';
 import { gzip } from 'zlib';
 
 import { getErrorMessage } from './getErrorMessage';
+import { omit, pick, type Pickable } from './lo';
 
-export interface S3StreamLoggerOptions extends WritableOptions {
+export interface S3StreamLoggerOptions extends WritableOptions, Pickable {
   access_key_id?: string;
   acl?: ObjectCannedACL;
   bucket?: string;

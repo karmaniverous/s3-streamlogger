@@ -7,7 +7,7 @@
     "@aws-sdk/client-s3": "^3.617.0",
     "@aws-sdk/client-sts": "^3.616.0",
     "date-fns": "^3.6.0",
-    "lodash": "^4.17.21"
+    "is-what": "^5.0.2"
   },
   "description": "Type-safe Node.js stream for logging to s3 with rotated object names. Usable as a Winston-file stream. Supports role assumption.",
   "devDependencies": {
