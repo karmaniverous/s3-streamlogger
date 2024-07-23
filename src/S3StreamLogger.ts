@@ -67,8 +67,8 @@ export class S3StreamLogger extends Writable {
   private s3Client: S3Client;
   private timeout: NodeJS.Timeout | null = null;
   private object_name: string | null = null;
-  private file_started: Date | null = null;
-  private last_write: Date | null = null;
+  private file_started = new Date();
+  private last_write = new Date();
   private buffers: Buffer[] = [];
   private unwritten = 0;
 
@@ -84,11 +84,11 @@ export class S3StreamLogger extends Writable {
     this.options.compress ??= false;
     this.options.folder ??= '';
     this.options.max_file_size ??= 200000; // 200k
-    this.options.name_format ?? `%Y-%m-%d-%H-%M-%S-%L-${hostname()}.log`;
+    this.options.name_format ??= `yyyy-MM-dd-HH-mm-ss-SSS-'${hostname()}.log'`;
     this.options.region ??= process.env.AWS_REGION;
     this.options.rotate_every ??= 60 * 60 * 1000; // 60 minutes
     this.options.secret_access_key ??= process.env.AWS_SECRET_ACCESS_KEY;
-    this.options.server_side_encryption ?? 'AES256';
+    this.options.server_side_encryption ??= 'AES256';
     this.options.tags ??= {};
     this.options.upload_every ??= 20 * 1000; // 20 seconds
 
@@ -172,7 +172,7 @@ export class S3StreamLogger extends Writable {
     };
 
     this.unwritten = 0;
-    const elapsed = new Date().getTime() - (this.file_started?.getTime() ?? 0);
+    const elapsed = Date.now() - this.file_started.getTime();
     let reset_buffers = false;
     if (
       forceNewFile ||
@@ -285,7 +285,7 @@ export class S3StreamLogger extends Writable {
     }
 
     if (
-      Date.now() - this.last_write!.getTime() > this.options.upload_every! ||
+      Date.now() - this.last_write.getTime() > this.options.upload_every! ||
       this.unwritten > this.options.buffer_size!
     ) {
       this._upload();

@@ -31,22 +31,22 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-mocha": "^10.4.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-tsdoc": "^0.2.17",
+    "eslint-plugin-tsdoc": "^0.3.0",
     "jsdom-global": "^3.0.2",
-    "knip": "^5.26.0",
-    "lefthook": "^1.7.2",
-    "mocha": "^10.6.0",
+    "knip": "^5.27.0",
+    "lefthook": "^1.7.5",
+    "mocha": "^10.7.0",
     "nyc": "^17.0.0",
     "prettier": "^3.3.3",
     "release-it": "^17.6.0",
-    "rimraf": "^5.0.9",
-    "rollup": "^4.18.1",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.19.0",
     "rollup-plugin-dts": "^6.1.1",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.3",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^7.16.1"
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.17.0"
   },
   "exports": {
     ".": {
@@ -91,6 +91,7 @@
     "hooks": {
       "after:init": [
         "npm run lint",
+        "npm run test",
         "npm run build"
       ],
       "after:release": [
