@@ -9,7 +9,7 @@
     "date-fns": "^3.6.0",
     "lodash": "^4.17.21"
   },
-  "description": "Stream for logging to s3 with rotated object names. Usable as a wiston-file stream. Permits role assumption.",
+  "description": "Type-safe Node.js stream for logging to s3 with rotated object names. Usable as a Winston-file stream. Supports role assumption.",
   "devDependencies": {
     "@eslint/js": "^9.7.0",
     "@rollup/plugin-alias": "^5.1.0",
@@ -119,5 +119,5 @@
   },
   "type": "module",
   "types": "dist/index.d.ts",
-  "version": "1.9.4"
+  "version": "1.10.0"
 }
