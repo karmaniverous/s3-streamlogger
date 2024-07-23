@@ -6,7 +6,21 @@ Key changes:
 
 - I eliminated the [`git-branch`](https://github.com/jonschlinkert/git-branch) dependency, which was generating a lot of dependency warnings. If you need your branch name as part of `name-format`, you can inject it.
 
-- I added an `assumeRole` method that allows you to assume an IAM role while writing to your bucket. This is very useful if you are writing to a central audit bucket in another account!
+- I added an [`assumeRole`](https://github.com/karmaniverous/s3-streamlogger/blob/d6d346fbd309ae7ac0e8dfdc1d80b506f436fa4e/src/S3StreamLogger.ts#L113-L136) method that allows you to assume an IAM role while writing to your bucket. This function takes an [`AssumeRoleRequest`](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sts/command/AssumeRoleCommand/) object as its sole argument and is VERY useful if you are writing to a central audit bucket in another account!
+
+Use `assumeRole`` like this:
+
+```ts
+import { S3StreamLogger } from '@karmaniverous/s3-streamlogger';
+
+const s3stream = new S3StreamLogger({ bucket: 'mys3bucket' });
+
+await s3stream.assumeRole({ RoleArn: 'arn:aws:iam::123456789012:role/MyRole' });
+
+s3stream.write('hello S3');
+```
+
+If you have appropriate permissions in place, this should just work.
 
 The original project had no unit tests, and this one still doesn't. If you feel like contributing, all of the machinery is there, see [this template](https://github.com/karmaniverous/npm-package-template-ts) for more info.
 
@@ -160,7 +174,7 @@ eg: "my/subfolder" or "nested".
 An optional set of tags to assign to the log files. Takes an object,
 eg: `{type: "myType"}` or `{type: "myType", project: "myProject"}`.
 
-#### access_key_id _deprecated_
+#### access*key_id \_deprecated*
 
 AWS access key ID, must have putObject permission on the specified bucket. Provide
 credentials through the environment variable `AWS_ACCESS_KEY_ID`, or as any
@@ -168,7 +182,7 @@ of the other [authentication
 methods](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-credentials-node.html)
 supported by the AWS SDK instead.
 
-#### secret_access_key _deprecated_
+#### secret*access_key \_deprecated*
 
 AWS secret key for the `access_key_id` specified. Provide
 credentials through the environment variable `AWS_SECRET_ACCESS_KEY`, or as any
