@@ -4,6 +4,8 @@ This project is a Typescript refactor of the original [s3-streamlogger](http://g
 
 Key changes:
 
+- It's a Typescript project now. Fully type-safe, and supports both `import` and `require`.
+
 - I eliminated the [`git-branch`](https://github.com/jonschlinkert/git-branch) dependency, which was generating a lot of dependency warnings. If you need your branch name as part of `name-format`, you can inject it.
 
 - I added an [`assumeRole`](https://github.com/karmaniverous/s3-streamlogger/blob/d6d346fbd309ae7ac0e8dfdc1d80b506f436fa4e/src/S3StreamLogger.ts#L113-L136) method that allows you to assume an IAM role while writing to your bucket. This function takes an [`AssumeRoleRequest`](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sts/command/AssumeRoleCommand/) object as its sole argument and is VERY useful if you are writing to a central audit bucket in another account!
@@ -24,7 +26,7 @@ If you have appropriate permissions in place, this should just work.
 
 The original project had no unit tests, and this one still doesn't. If you feel like contributing, all of the machinery is there, see [this template](https://github.com/karmaniverous/npm-package-template-ts) for more info.
 
-**The original README follows...**
+**The original README follows. I have NOT refactored it yet, so wherever you see a `require` statement below, feel free to use an `import`.**
 
 ## s3-streamlogger
 
