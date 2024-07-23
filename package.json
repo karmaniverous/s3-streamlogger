@@ -1,36 +1,124 @@
 {
-  "name": "s3-streamlogger",
-  "version": "1.9.4",
-  "description": "Stream for logging to s3 with rotated object names. Usable as a wiston-file stream. ",
-  "main": "index.js",
+  "author": "James Crosby <james@coggle.it> & Jason Williscroft <me@karmanivero.us>",
+  "bugs": {
+    "url": "https://github.com/karmaniverous/s3-streamlogger/issues"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.617.0",
+    "@aws-sdk/client-sts": "^3.616.0",
+    "date-fns": "^3.6.0",
+    "lodash": "^4.17.21"
+  },
+  "description": "Stream for logging to s3 with rotated object names. Usable as a wiston-file stream. Permits role assumption.",
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/chai": "^4.3.16",
+    "@types/eslint__js": "^8.42.3",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/eslint-plugin-mocha": "^10.4.0",
+    "@types/lodash": "^4.17.7",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.11",
+    "auto-changelog": "^2.4.0",
+    "chai": "^5.1.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-mocha": "^10.4.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "jsdom-global": "^3.0.2",
+    "knip": "^5.26.0",
+    "lefthook": "^1.7.2",
+    "mocha": "^10.6.0",
+    "nyc": "^17.0.0",
+    "prettier": "^3.3.3",
+    "release-it": "^17.6.0",
+    "rimraf": "^5.0.9",
+    "rollup": "^4.18.1",
+    "rollup-plugin-dts": "^6.1.1",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.1"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/index.mjs",
+        "types": "./dist/index.d.mts"
+      },
+      "require": {
+        "default": "./dist/index.cjs",
+        "types": "./dist/index.d.cts"
+      }
+    }
+  },
   "files": [
-    "index.js",
-    "readme.md"
+    "dist"
   ],
-  "scripts": {
-    "test": "npx eslint ./index.js --config eslint.json"
+  "homepage": "https://github.com/karmaniverous/s3-streamlogger#readme",
+  "keywords": [
+    "aws",
+    "s3",
+    "logging",
+    "winston",
+    "audit",
+    "transport"
+  ],
+  "license": "ISC",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "name": "@karmaniverous/s3-streamlogger",
+  "publishConfig": {
+    "access": "public"
+  },
+  "release-it": {
+    "git": {
+      "changelog": "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
+      "commitMessage": "chore: release v${version}",
+      "requireBranch": "main"
+    },
+    "github": {
+      "release": true
+    },
+    "hooks": {
+      "after:init": [
+        "npm run lint",
+        "npm run test",
+        "npm run build"
+      ],
+      "after:release": [
+        "git switch -c release/${version}",
+        "git push -u origin release/${version}",
+        "git switch ${branchName}"
+      ]
+    },
+    "npm": {
+      "publish": true
+    }
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/coggle/s3-streamlogger.git"
+    "url": "git+https://github.com/karmaniverous/s3-streamlogger.git"
   },
-  "keywords": [
-    "winston",
-    "logging",
-    "s3"
-  ],
-  "author": "James Crosby <james@coggle.it>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/coggle/s3-streamlogger/issues"
+  "scripts": {
+    "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "knip": "knip",
+    "license": "license-check-and-add",
+    "lint": "eslint src/** && prettier -c src",
+    "lint:fix": "eslint --fix src/** && prettier --write src",
+    "release": "release-it",
+    "release:pre": "release-it --no-git.requireBranch --github.prerelease --preRelease",
+    "test": "cross-env LOG_LEVEL=debug nyc mocha"
   },
-  "homepage": "https://github.com/coggle/s3-streamlogger",
-  "dependencies": {
-    "@aws-sdk/client-s3": "^3.353.0",
-    "git-branch": "^2.0.1",
-    "strftime": "^0.10.2"
-  },
-  "devDependencies": {
-    "eslint": "^8.42.0"
-  }
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "version": "1.9.4"
 }
