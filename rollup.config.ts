@@ -28,8 +28,8 @@ const config: RollupOptions[] = [
     ...commonInputOptions,
     output: [
       {
-        extend: true,
         dir: `${outputPath}/mjs`,
+        extend: true,
         format: 'esm',
       },
     ],
@@ -40,8 +40,8 @@ const config: RollupOptions[] = [
     ...commonInputOptions,
     output: [
       {
-        extend: true,
         dir: `${outputPath}/cjs`,
+        extend: true,
         format: 'cjs',
       },
     ],
