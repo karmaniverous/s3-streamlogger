@@ -29,9 +29,8 @@ const config: RollupOptions[] = [
     output: [
       {
         extend: true,
-        file: `${outputPath}/index.mjs`,
+        dir: `${outputPath}/mjs`,
         format: 'esm',
-        inlineDynamicImports: true,
       },
     ],
   },
@@ -42,9 +41,8 @@ const config: RollupOptions[] = [
     output: [
       {
         extend: true,
-        file: `${outputPath}/index.cjs`,
+        dir: `${outputPath}/cjs`,
         format: 'cjs',
-        inlineDynamicImports: true,
       },
     ],
   },
