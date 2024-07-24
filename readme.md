@@ -6,7 +6,7 @@
 
 `S3StreamTransport` wraps `S3StreamLogger` into a [`winston` transport](https://github.com/winstonjs/winston/blob/master/docs/transports.md) for an easy developer experience. See below for an implementation example.
 
-This project is a TypeScript refactor of the original [s3-streamlogger](http://github.com/coggle/s3-streamlogger) package. It has a modern project architecture and offers some new features, but is otherwise a drop-in replacement for the original package.
+This project is a TypeScript refactor of the original [`s3-streamlogger`](http://github.com/coggle/s3-streamlogger) package. It has a modern project architecture and offers some new features, **but is otherwise a drop-in replacement for the original package!**
 
 ## Using `S3StreamLogger`
 
@@ -32,16 +32,18 @@ The argument to the `assumeRole` method an [`AssumeRoleRequest`](https://docs.aw
 ## Using `S3StreamTransport`
 
 ```ts
-// Create an instance of the transport. The first parameter is an S3StreamLoggerOptions object, and the second is a winston TransportStreamOptions object.
+// Create an instance of the transport. The first parameter is an
+// S3StreamLoggerOptions object, and the second is a winston
+// TransportStreamOptions object.
 s3StreamTransport = new S3StreamTransport(
   { bucket: 'my-bucket' },
   {
-    // Throw a timestamp and the environment variables in for context.
+    // Throw in a timestamp & environment variables for context.
     format: winston.format.combine(
       winston.format.timestamp(),
       winston.format((info) => ({
         ...info,
-        env: diminish(process.env),
+        env: process.env,
       }))(),
     ),
 
@@ -61,7 +63,7 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console(), s3StreamTransport],
 });
 
-// Log a message to your console.
+// Log a message just to your console.
 logger.info('foo');
 
 // Log a message to your console AND your S3 bucket.
