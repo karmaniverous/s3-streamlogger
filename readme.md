@@ -12,6 +12,8 @@ Key changes:
 
 - I added an [`assumeRole`](https://github.com/karmaniverous/s3-streamlogger/blob/d6d346fbd309ae7ac0e8dfdc1d80b506f436fa4e/src/S3StreamLogger.ts#L113-L136) method that allows you to assume an IAM role while writing to your bucket. This function takes an [`AssumeRoleRequest`](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/sts/command/AssumeRoleCommand/) object as its sole argument and is VERY useful if you are writing to a central audit bucket in another account!
 
+- The `S3StreamTransport` export is a Winston transport. All the usual options apply, and the class also exposes the `assumeRole` method of the underlying `S3StreamLogger`. This is useful if you are using Winston for logging.
+
 Use `assumeRole`` like this:
 
 ```ts
