@@ -1,0 +1,26 @@
+###############################################################################
+# CREATE A LOCAL COPY OF THIS TEMPLATE FILE!
+#
+# Name the copy config.local and fill in the values below. This file is covered
+# by .gitignore and will not be committed to the repository.
+###############################################################################
+
+# THIS FILE SPECIFIES YOUR AWS ACCESS FOR UNIT TESTS.
+
+# The test engine will acquire an AWS session either by loading keys from your 
+# credentials file or by logging you into SSO. Specify your access type here.
+PROFILE_TYPE=sso # sso | keys
+
+# Whichever PROFILE_TYPE you choose, this is the name of the profile to use 
+# from your config or credentials file.
+AWS_PROFILE=default
+
+# If you are using a non-default location for either of these files, specify 
+# it here.
+AWS_CONFIG_FILE=               # sso profiles
+AWS_SHARED_CREDENTIALS_FILE=   # access key profiles
+
+# What bucket should be used for testing? Your selected profile should have 
+# s3:* access to this bucket.
+BUCKET_NAME=my-bucket
+
