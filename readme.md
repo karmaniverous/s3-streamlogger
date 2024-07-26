@@ -1,4 +1,6 @@
-[![npm version](https://badge.fury.io/js/@karmaniverous%2Fs3-streamlogger.svg)](https://badge.fury.io/js/@karmaniverous%2Fs3-streamlogger)
+# This repo is deprecated (for now)!
+
+Ran into some issues at the same time I found a better implementation path for the project this thing was meant to support. So consider it back-burnered.
 
 ## Low-Impact S3 Logging
 
